@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net">
+  <diagram name="Medical ERP ERD">
+    <mxGraphModel dx="1264" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- patient -->
+        <mxCell id="patient" value="patient" style="swimlane" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="patient_fields" value="id (PK) (환자ID)&#xa;name (이름)&#xa;birth_date (생년월일)&#xa;gender (성별)&#xa;phone (전화번호)" style="text;html=1;whiteSpace=wrap;" vertex="1" parent="patient">
+          <mxGeometry x="0" y="20" width="200" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- appointment -->
+        <mxCell id="appointment" value="appointment" style="swimlane" vertex="1" parent="1">
+          <mxGeometry x="260" y="20" width="200" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="appointment_fields" value="id (PK) (예약ID)&#xa;patient_id (FK) (환자ID)&#xa;reserved_time (예약시간)&#xa;status (상태)" style="text;html=1;whiteSpace=wrap;" vertex="1" parent="appointment">
+          <mxGeometry x="0" y="20" width="200" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- visit -->
+        <mxCell id="visit" value="visit" style="swimlane" vertex="1" parent="1">
+          <mxGeometry x="500" y="20" width="220" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="visit_fields" value="id (PK) (진료ID)&#xa;patient_id (FK) (환자ID)&#xa;appointment_id (FK) (예약ID)&#xa;diagnosis (진단)&#xa;notes (메모)&#xa;visit_time (진료시간)" style="text;html=1;whiteSpace=wrap;" vertex="1" parent="visit">
+          <mxGeometry x="0" y="20" width="220" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- billing -->
+        <mxCell id="billing" value="billing" style="swimlane" vertex="1" parent="1">
+          <mxGeometry x="750" y="20" width="200" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="billing_fields" value="id (PK) (수납ID)&#xa;visit_id (FK) (진료ID)&#xa;total_amount (총금액)&#xa;payment_method (결제수단)&#xa;paid_at (결제일)" style="text;html=1;whiteSpace=wrap;" vertex="1" parent="billing">
+          <mxGeometry x="0" y="20" width="200" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- medication -->
+        <mxCell id="medication" value="medication" style="swimlane" vertex="1" parent="1">
+          <mxGeometry x="500" y="220" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="medication_fields" value="id (PK) (약품ID)&#xa;name (약품명)&#xa;unit (단위)&#xa;default_dosage (기본용량)" style="text;html=1;whiteSpace=wrap;" vertex="1" parent="medication">
+          <mxGeometry x="0" y="20" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- visit_medication -->
+        <mxCell id="visit_medication" value="visit_medication" style="swimlane" vertex="1" parent="1">
+          <mxGeometry x="750" y="220" width="220" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="visit_medication_fields" value="id (PK) (처방ID)&#xa;visit_id (FK) (진료ID)&#xa;medication_id (FK) (약품ID)&#xa;quantity (수량)&#xa;dosage (복용법)" style="text;html=1;whiteSpace=wrap;" vertex="1" parent="visit_medication">
+          <mxGeometry x="0" y="20" width="220" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- inventory -->
+        <mxCell id="inventory" value="inventory" style="swimlane" vertex="1" parent="1">
+          <mxGeometry x="1000" y="220" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="inventory_fields" value="id (PK) (재고ID)&#xa;medication_id (FK) (약품ID)&#xa;quantity (수량)&#xa;updated_at (갱신일)" style="text;html=1;whiteSpace=wrap;" vertex="1" parent="inventory">
+          <mxGeometry x="0" y="20" width="200" height="100" as="geometry" />
+        </mxCell>
+
+      
+<!-- 관계선 정의 -->
+<mxCell id="rel1" style="endArrow=block;" edge="1" source="appointment" target="patient" parent="1">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+<mxCell id="rel2" style="endArrow=block;" edge="1" source="visit" target="patient" parent="1">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+<mxCell id="rel3" style="endArrow=block;" edge="1" source="visit" target="appointment" parent="1">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+<mxCell id="rel4" style="endArrow=block;" edge="1" source="billing" target="visit" parent="1">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+<mxCell id="rel5" style="endArrow=block;" edge="1" source="visit_medication" target="visit" parent="1">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+<mxCell id="rel6" style="endArrow=block;" edge="1" source="visit_medication" target="medication" parent="1">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+<mxCell id="rel7" style="endArrow=block;" edge="1" source="inventory" target="medication" parent="1">
+  <mxGeometry relative="1" as="geometry"/>
+</mxCell>
+</root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

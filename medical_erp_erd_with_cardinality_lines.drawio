@@ -1,0 +1,222 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.2.2 Chrome/134.0.6998.178 Electron/35.1.2 Safari/537.36" version="26.2.2">
+  <diagram name="Medical ERP ERD" id="0">
+    <mxGraphModel dx="1428" dy="2018" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="patient" value="PATIENT" style="swimlane" parent="1" vertex="1">
+          <mxGeometry x="88" y="385" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="patient_fields" value="id (PK) (환자ID)&amp;nbsp;BIGINT NN&lt;br&gt;name (이름) VARCHAR(20) NN&lt;br&gt;birth_date (생년월일)&amp;nbsp;DATE NN&lt;br&gt;gender (성별) CHAR(2) NN&lt;br&gt;phone (전화번호) VARCHAR(20) NN&lt;div&gt;created_dt (생성일시) DATETIME NN&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;" parent="patient" vertex="1">
+          <mxGeometry y="20" width="200" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="appointment" value="APPOINTMENT" style="swimlane" parent="1" vertex="1">
+          <mxGeometry x="70" y="95" width="245" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="appointment_fields" value="id (PK) (예약ID)&amp;nbsp;BIGINT NN&lt;br&gt;patient_id (FK) (환자ID) BIGINT&amp;nbsp;NN&lt;div&gt;staff_id (FK) (사용자ID) INT NA&lt;br&gt;reserved_time (예약시간)&amp;nbsp;DATETIME NN&lt;br&gt;status (상태) CHAR(2) NN&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;" parent="appointment" vertex="1">
+          <mxGeometry y="20" width="240" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="visit" value="TREATMENT_RECORD" style="swimlane" parent="1" vertex="1">
+          <mxGeometry x="545" y="85" width="220" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="visit_fields" value="id (PK) (진료ID)&amp;nbsp;BIGINT NN&lt;br&gt;patient_id (FK) (환자ID)&amp;nbsp;BIGINT NN&lt;br&gt;appointment_id (FK) (예약ID)&amp;nbsp;BIGINT NA&lt;div&gt;doctor_id (FK) (사용자ID) INT NN&lt;br&gt;diagnosis (진단) TEXT NA&lt;br&gt;notes (메모) TEXT NA&lt;br&gt;treament_dt (진료일시) DATETIME NN&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;" parent="visit" vertex="1">
+          <mxGeometry y="20" width="220" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="billing" value="BILLING" style="swimlane" parent="1" vertex="1">
+          <mxGeometry x="990" y="95" width="265" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="billing_fields" value="id (PK) (수납ID)&amp;nbsp;BIGINT NN&lt;br&gt;treatment_record_id (FK) (진료ID)&amp;nbsp;BIGINT NN&lt;div&gt;staff_id (FK) (사용자ID) INT NN&lt;br&gt;total_amount (총금액) INT NN&lt;br&gt;payment_method (결제수단) VARCHAR(20) NN&lt;br&gt;paid_dt (결제일시) DATETIME NN&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;" parent="billing" vertex="1">
+          <mxGeometry y="20" width="260" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="medication" value="MEDICATION" style="swimlane" parent="1" vertex="1">
+          <mxGeometry x="512" y="585" width="250" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="medication_fields" value="id (PK) (약품ID) BIGINT NN&lt;br&gt;name (약품명) VARCHAR(100) NN&lt;br&gt;unit (단위) VARCHAR(20) NN&lt;br&gt;default_dosage (기본용량) VARCHAR(50) NA" style="text;html=1;whiteSpace=wrap;" parent="medication" vertex="1">
+          <mxGeometry y="20" width="250" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="visit_medication" value="TREATMENT_MEDICATION" style="swimlane" parent="1" vertex="1">
+          <mxGeometry x="507" y="335" width="260" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="visit_medication_fields" value="id (PK) (처방ID) BIGINT NN&lt;br&gt;treatment_record_id (FK) (진료ID) BIGINT NN&lt;br&gt;medication_id (FK) (약품ID) BIGINT&amp;nbsp;NN&lt;br&gt;quantity (수량) INT NN&lt;br&gt;dosage (복용법) VARCHAR(100) NA" style="text;html=1;whiteSpace=wrap;" parent="visit_medication" vertex="1">
+          <mxGeometry y="20" width="280" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="inventory" value="INVENTORY" style="swimlane" parent="1" vertex="1">
+          <mxGeometry x="1005" y="585" width="240" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="inventory_fields" value="medication_id (PK,FK) (약품ID) BIGINT&amp;nbsp;&amp;nbsp;NN&lt;br&gt;quantity (수량) INT NN&lt;br&gt;updated_dt (갱신일시) DATETIME NN" style="text;html=1;whiteSpace=wrap;" parent="inventory" vertex="1">
+          <mxGeometry y="20" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="endArrow=block;" parent="1" source="appointment" target="patient" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l1" value="1" style="text;html=1;align=center;" parent="e1" vertex="1" connectable="0">
+          <mxGeometry x="520" y="140" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l2" value="N" style="text;html=1;align=center;" parent="e1" vertex="1" connectable="0">
+          <mxGeometry x="617" y="310" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="endArrow=block;" parent="1" source="visit" target="patient" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l3" value="1" style="text;html=1;align=center;" parent="e2" vertex="1" connectable="0">
+          <mxGeometry x="300" y="360" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l4" value="N" style="text;html=1;align=center;" parent="e2" vertex="1" connectable="0">
+          <mxGeometry x="612" y="560" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="endArrow=block;dashed=1;" parent="1" source="visit" target="appointment" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l5" value="0..1" style="text;html=1;align=center;" parent="e3" vertex="1" connectable="0">
+          <mxGeometry x="320" y="140" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l6" value="1" style="text;html=1;align=center;" parent="e3" vertex="1" connectable="0">
+          <mxGeometry x="970" y="620" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="endArrow=block;" parent="1" source="billing" target="visit" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l7" value="1" style="text;html=1;align=center;" parent="e4" vertex="1" connectable="0">
+          <mxGeometry x="760" y="140" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l8" value="1" style="text;html=1;align=center;" parent="e4" vertex="1" connectable="0">
+          <mxGeometry x="760" y="620" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" style="endArrow=block;entryX=0.432;entryY=0.986;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="visit_medication" target="visit_fields" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l9" value="1" style="text;html=1;align=center;" parent="e5" vertex="1" connectable="0">
+          <mxGeometry x="970" y="140" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l10" value="N" style="text;html=1;align=center;" parent="e5" vertex="1" connectable="0">
+          <mxGeometry x="520" y="220" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" style="endArrow=block;" parent="1" source="visit_medication" target="medication" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l11" value="1" style="text;html=1;align=center;" parent="e6" vertex="1" connectable="0">
+          <mxGeometry x="616" y="250" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l12" value="N" style="text;html=1;align=center;" parent="e6" vertex="1" connectable="0">
+          <mxGeometry x="170" y="240" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" style="endArrow=block;" parent="1" source="inventory" target="medication" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l13" value="1" style="text;html=1;align=center;" parent="e7" vertex="1" connectable="0">
+          <mxGeometry x="612" y="480" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="l14" value="1" style="text;html=1;align=center;" parent="e7" vertex="1" connectable="0">
+          <mxGeometry x="164" y="357" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-1" value="&lt;div&gt;Notice&lt;/div&gt;&lt;div&gt;&amp;nbsp;- IE, 바커 표기법이 아닌, 경량화된 도메인 중심 모델링으로 진행함&lt;/div&gt;&amp;nbsp;- 화살표의 방향은 외래키(Foreign Key)를 가진 쪽으로 향함&lt;div&gt;&amp;nbsp;- NN = NOT NULL&lt;/div&gt;&lt;div&gt;&amp;nbsp;- NA = NULLABLE&lt;/div&gt;" style="text;whiteSpace=wrap;html=1;fontSize=16;fontColor=light-dark(#C83131,#EDEDED);" vertex="1" parent="1">
+          <mxGeometry x="40" y="-260" width="480" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-2" value="DISPENSE_LOG" style="swimlane" vertex="1" parent="1">
+          <mxGeometry x="950" y="352" width="300" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-3" value="treatment_medication_id (PK,FK) (처방ID) BIGINT NN&lt;br&gt;medication_id (PK,FK) (약품ID) BIGINT NN&lt;br&gt;quantity (수량) INT NN&lt;div&gt;dispensed_dt (출고 날짜) DATETIME NN&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;confirmed_by&lt;/span&gt;&amp;nbsp;(FK) (출고 직원) INT NA&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;" vertex="1" parent="Wa7zNXzD32x-vM8ZxwML-2">
+          <mxGeometry y="20" width="290" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-4" style="endArrow=block;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Wa7zNXzD32x-vM8ZxwML-3" target="visit_medication">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="900" y="320" as="sourcePoint" />
+            <mxPoint x="900" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-7" style="endArrow=block;exitX=0;exitY=0.692;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitPerimeter=0;" edge="1" parent="1" source="Wa7zNXzD32x-vM8ZxwML-3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="970" y="432" as="sourcePoint" />
+            <mxPoint x="687.5" y="585" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-10" value="1" style="text;html=1;align=center;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="700" y="550" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-11" value="N" style="text;html=1;align=center;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="915.5" y="408" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-12" value="1" style="text;html=1;align=center;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="765" y="375" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-13" value="N" style="text;html=1;align=center;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="916.5" y="375" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-14" value="USER" style="swimlane" vertex="1" parent="1">
+          <mxGeometry x="553" y="-190" width="220" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-15" value="id (PK) (사용자ID)&amp;nbsp;INT NN&amp;nbsp;&lt;br&gt;login_id&amp;nbsp; (로그인ID) VARCHAR(10) NN&lt;br&gt;password (비밀번호) VARCHAR(10) NN&lt;br&gt;name (이름) VARCHAR(20) NN&lt;br&gt;notes (메모) TEXT NA&lt;br&gt;role (역할) VARCHAR(10) NN&lt;div&gt;status (상태) VARCHAR(10) NN&lt;/div&gt;&lt;div&gt;created_dt (생성일시) DATETIME NN&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;" vertex="1" parent="Wa7zNXzD32x-vM8ZxwML-14">
+          <mxGeometry y="20" width="220" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-16" style="endArrow=block;exitX=0.464;exitY=1.007;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="Wa7zNXzD32x-vM8ZxwML-15" target="visit">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="80" as="sourcePoint" />
+            <mxPoint x="510" y="-10" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-17" value="1" style="text;html=1;align=center;" vertex="1" connectable="0" parent="Wa7zNXzD32x-vM8ZxwML-16">
+          <mxGeometry x="970" y="140" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-18" value="N" style="text;html=1;align=center;" vertex="1" connectable="0" parent="Wa7zNXzD32x-vM8ZxwML-16">
+          <mxGeometry x="520" y="220" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-20" value="1" style="text;html=1;align=center;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="630" y="-30" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-21" value="N" style="text;html=1;align=center;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="630" y="60" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-22" style="endArrow=block;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="Wa7zNXzD32x-vM8ZxwML-15" target="billing">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="850" y="-114" as="sourcePoint" />
+            <mxPoint x="850" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-24" value="N" style="text;html=1;align=center;" vertex="1" connectable="0" parent="Wa7zNXzD32x-vM8ZxwML-22">
+          <mxGeometry x="520" y="220" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-25" value="1" style="text;html=1;align=center;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="773" y="-110" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-26" value="N" style="text;html=1;align=center;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="1080" y="60" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-27" style="endArrow=block;exitX=1;exitY=0.25;exitDx=0;exitDy=0;dashed=1;" edge="1" parent="1" source="Wa7zNXzD32x-vM8ZxwML-15">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="909" y="-150" as="sourcePoint" />
+            <mxPoint x="1250" y="420" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1290" y="-135" />
+              <mxPoint x="1290" y="140" />
+              <mxPoint x="1290" y="420" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-29" value="N" style="text;html=1;align=center;" vertex="1" connectable="0" parent="Wa7zNXzD32x-vM8ZxwML-27">
+          <mxGeometry x="520" y="220" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-30" style="endArrow=block;exitX=0.014;exitY=0.4;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="Wa7zNXzD32x-vM8ZxwML-15" target="appointment">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="545" y="-110" as="sourcePoint" />
+            <mxPoint x="315" y="47" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="193" y="-110" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-33" value="1" style="text;html=1;align=center;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="525" y="-140" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-35" value="1" style="text;html=1;align=center;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="773" y="-160" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-36" value="0..1" style="text;html=1;align=center;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="1255" y="395" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Wa7zNXzD32x-vM8ZxwML-37" value="0..1" style="text;html=1;align=center;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="160" y="65" width="30" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
