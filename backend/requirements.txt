@@ -3,3 +3,5 @@ djangorestframework
 psycopg2-binary
 python-decouple
 django-admin-rangefilter
+drf-yasg
+djangorestframework-simplejwt==5.5.0

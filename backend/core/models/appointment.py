@@ -25,6 +25,16 @@ class Appointment(TimeStampedModel):
         db_index=False,
     )
 
+    doctor = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='doctor_appointment_records',
+        verbose_name='담당의사',
+        db_index=False,
+    )
+
     appointment_dt = models.DateTimeField("예약일시")
 
     status_choices = [
